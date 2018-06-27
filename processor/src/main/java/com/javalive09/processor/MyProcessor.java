@@ -15,9 +15,9 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 
 import com.google.auto.service.AutoService;
+import com.javalive09.annotation.Code;
 import com.javalive09.annotation.Constant;
-import com.javalive09.annotation.Test;
-import com.javalive09.annotation.Tester;
+import com.javalive09.annotation.Run;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
@@ -43,7 +43,7 @@ public class MyProcessor extends AbstractProcessor {
 
             HashSet<String> hashSet = new HashSet<>();
 
-            for(Element element : roundEnvironment.getElementsAnnotatedWith(Test.class)) {
+            for(Element element : roundEnvironment.getElementsAnnotatedWith(Code.class)) {
                 if(element.getKind() == ElementKind.METHOD) {
                     ExecutableElement executableElement = (ExecutableElement)element;
                     TypeElement typeElement = (TypeElement) executableElement.getEnclosingElement();
@@ -81,7 +81,7 @@ public class MyProcessor extends AbstractProcessor {
     @Override
     public Set<String> getSupportedAnnotationTypes() {
         Set<String> set = new HashSet<>();
-        set.add(Tester.class.getCanonicalName());
+        set.add(Run.class.getCanonicalName());
         return set;
     }
 

@@ -1,4 +1,5 @@
 apply plugin: 'java-library'
+apply plugin: 'com.novoda.bintray-release'//添加
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -6,5 +7,30 @@ dependencies {
     implementation 'com.squareup:javapoet:1.9.0'
     implementation 'com.google.auto.service:auto-service:1.0-rc3'
 
-    implementation 'com.javalive09.annotation:annotation:1.0.2'
+    implementation 'com.javalive09.annotation:annotation:1.0.3'
+}
+
+publish {
+    userOrg = 'javalive09'//bintray.com用户名
+    groupId = 'com.javalive09.processor'//包名
+    artifactId = 'processor'//项目名称
+    publishVersion = '1.1'//版本号
+    desc = 'simple library for programmer collect code(demo, unit test ...)'//描述
+    website = 'https://github.com/javalive09/CodebagProcessor'//网站
+}
+
+task('uploadJcenter') doLast {
+    //加载资源
+    Properties properties = new Properties()
+    InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream()
+    properties.load(inputStream)
+    //读取字段
+    def bintray_user = properties.getProperty('bintray_user')
+    def bintray_key = properties.getProperty('bintray_key')
+    println "bintray_user >> " + bintray_user
+    println "bintray_key >> " + bintray_key
+    def uploadJcenterCMD = './gradlew clean build bintrayUpload -PbintrayUser=' + bintray_user + ' -PbintrayKey=' + bintray_key + ' -PdryRun=false'
+    println "uploadJcenterCMD >> " + uploadJcenterCMD
+    def uploadAPKResult = uploadJcenterCMD.execute().text.trim()
+    println "uploadAPKResult >>>>>>>>>>>> " + uploadAPKResult
 }
