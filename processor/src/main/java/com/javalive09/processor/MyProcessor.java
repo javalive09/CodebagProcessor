@@ -43,7 +43,7 @@ public class MyProcessor extends AbstractProcessor {
 
             HashSet<String> hashSet = new HashSet<>();
 
-            for(Element element : roundEnvironment.getElementsAnnotatedWith(Code.class)) {
+            for(Element element : roundEnvironment.getElementsAnnotatedWith(Run.class)) {
                 if(element.getKind() == ElementKind.METHOD) {
                     ExecutableElement executableElement = (ExecutableElement)element;
                     TypeElement typeElement = (TypeElement) executableElement.getEnclosingElement();
@@ -81,7 +81,7 @@ public class MyProcessor extends AbstractProcessor {
     @Override
     public Set<String> getSupportedAnnotationTypes() {
         Set<String> set = new HashSet<>();
-        set.add(Run.class.getCanonicalName());
+        set.add(Code.class.getCanonicalName());
         return set;
     }
 
