@@ -5,7 +5,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation 'com.squareup:javapoet:1.9.0'
-    implementation 'com.google.auto.service:auto-service:1.0-rc3'
+    implementation 'com.google.auto.service:auto-service:1.0-rc4'
 
     implementation 'com.javalive09.annotation:annotation:1.0.3'
 }
@@ -14,7 +14,7 @@ publish {
     userOrg = 'javalive09'//bintray.com用户名
     groupId = 'com.javalive09.processor'//包名
     artifactId = 'processor'//项目名称
-    publishVersion = '1.2'//版本号
+    publishVersion = '1.5'//版本号
     desc = 'simple library for programmer collect code(demo, unit test ...)'//描述
     website = 'https://github.com/javalive09/CodebagProcessor'//网站
 }
